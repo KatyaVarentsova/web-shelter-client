@@ -1,0 +1,39 @@
+.card {
+    border-radius: 40px;
+    width: 305px;
+    height: 480px;
+    background-color: var(--color-cream);
+}
+
+.cardImage {
+    width: 100%;
+    height: 320px;
+    border-radius: 40px 40px 0 0;
+    object-fit: cover;
+    object-position: center;
+}
+
+.cardDescription {
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cardTitle {
+    margin: 0;
+    font-family: var(--second-family);
+    font-weight: 500;
+    font-size: 24px;
+    text-align: center;
+    color: var(--color-dark);
+}
+
+.cardText {
+    margin: 0;
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+    color: var(--color-dark);
+}

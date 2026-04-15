@@ -1,0 +1,51 @@
+.blockBackground {
+    background-color: var(--color-caramel);
+    padding: 40px 80px;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.columnLogo {
+    align-self: center;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.headerNav {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--color-white);
+    margin: 0;
+}
+
+.link {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 32px;
+    color: var(--color-white);
+    margin: 0;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+}

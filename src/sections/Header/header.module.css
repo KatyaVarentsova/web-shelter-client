@@ -1,0 +1,40 @@
+.blockBackground {
+  background-color: var(--color-brown);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 16px 80px;
+}
+
+.nav {
+  margin: auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 2.4rem 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 28px;
+}
+
+.link {
+  color: var(--color-white);
+  padding: 0 10px 5px;
+  border: 3px solid transparent;
+  border-radius: 25px;
+  font-size: 24px;
+}
+
+.link:hover,
+.link:focus {
+  color: var(--color-white);
+  border: 3px solid var(--color-white);
+}
+
+.link:active {
+  color: var(--color-cream);
+  border: 3px solid var(--color-cream);
+}

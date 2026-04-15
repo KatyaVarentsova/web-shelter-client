@@ -1,0 +1,35 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+}
+
+:root {
+  --color-sand: #E8D5B7;        /* песочный */
+  --color-cream: #F5EBDD;       /* кремовый */
+  --color-caramel: #C68A5B;     /* карамельный */
+  --color-brown: #6B4F3A;       /* коричневый */
+  --color-dark: #2F2A28;        /* почти чёрный */
+  --color-gray: #9B9B9B;        /* серый */
+  --color-pink: #E9B4A4;        /* мягкий розовый */
+  --color-white: #FCFCFC;       /* белый */
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+    background-color: transparent; 
+    color: inherit;                
+    border: none;                  
+    padding: 0;                    
+    font: inherit;                 
+    cursor: pointer;               
+}
