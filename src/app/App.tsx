@@ -6,6 +6,7 @@ import { HomePage } from '../pages/HomePage/homePage'
 import { useAppDispatch, useAppSelector } from '../store'
 import { getPets, petsSelector } from '../store/petsSlice'
 import { useEffect } from 'react'
+import { LoginPage } from '../pages/LoginPage/loginPage'
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
   useEffect(() => {
     dispatch(getPets())
   }, [])
-  
+
   useEffect(() => {
     console.log(pets)
   }, [pets])
@@ -23,11 +24,12 @@ function App() {
   return (
     <>
       <Header />
-
-      <Routes>
-        <Route path='/' element={<HomePage></HomePage>}></Route>
-        <Route path='/second' element={<></>}></Route>
-      </Routes>
+      <main className="main">
+        <Routes>
+          <Route path='/' element={<HomePage></HomePage>}></Route>
+          <Route path='/login' element={<LoginPage></LoginPage>}></Route>
+        </Routes>
+      </main>
 
       <Footer></Footer>
     </>

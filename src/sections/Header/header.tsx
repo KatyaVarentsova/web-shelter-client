@@ -14,7 +14,7 @@ export const Header: FC = () => {
 
                 <nav className={style.nav}>
                     <Link className={style.link} to="/">О нас</Link>
-                    <Link className={style.link} to="/test2">Пункт 2</Link>
+                    <Link className={style.link} to="/login">Вход</Link>
                 </nav>
 
             </div>

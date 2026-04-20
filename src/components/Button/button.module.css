@@ -1,24 +1,60 @@
 .button {
-    font-family: var(--second-family);
-    font-weight: 700;
-    font-size: 32px;
-    text-align: center;
-    color: var(--color-white);
-    border-radius: 40px;
-    background-color: var(--color-caramel);
-    padding: 20px 40px;
-    border: 4px solid transparent;
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 32px;
+  border-radius: 40px;
+  padding: 20px 40px;
+  border: 4px solid transparent;
+  color: var(--color-white);
 }
 
-.button:hover {
-    background-color: transparent;
-    color: var(--color-caramel);
-    border: 4px solid var(--color-caramel);
+.caramelButton {
+  background-color: var(--color-caramel);
 }
 
-.button:focus,
-.button:active {
-    background-color: var(--color-brown);
-    color: var(--color-white);
-    border: 4px solid transparent;
+/* hover */
+.caramelButton:hover {
+  background-color: transparent;
+  color: var(--color-caramel);
+  border: 4px solid var(--color-caramel);
+}
+
+/* active */
+.caramelButton:active {
+  background-color: var(--color-caramel);
+  border: 4px solid transparent;
+  color: var(--color-white);
+}
+
+/* focus */
+.caramelButton:focus {
+  background-color: var(--color-caramel);
+  border: 4px solid transparent;
+  color: var(--color-white);
+}
+
+/* ------------------------------------------ */
+.brownButton {
+  background-color: var(--color-brown);
+}
+
+/* hover */
+.brownButton:hover {
+  background-color: transparent;
+  color: var(--color-brown);
+  border: 4px solid var(--color-brown);
+}
+
+/* active */
+.brownButton:active {
+  background-color: var(--color-brown);
+  border: 4px solid transparent;
+  color: var(--color-white);
+}
+
+/* focus */
+.brownButton:focus {
+  background-color: var(--color-brown);
+  border: 4px solid transparent;
+  color: var(--color-white);
 }
