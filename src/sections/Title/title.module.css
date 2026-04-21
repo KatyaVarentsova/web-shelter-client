@@ -1,11 +1,12 @@
 .blockBackground {
-  background-color: var(--color-sand);
-  margin-bottom: 40px;
+    background-color: var(--color-sand);
+    margin-bottom: 40px;
 }
 
 .section {
     display: flex;
-    margin: 0 80px;
+    margin: 0 auto;
+    max-width: 1440px;
     align-items: center;
     padding: 40px 0;
 }

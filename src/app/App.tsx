@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../store'
 import { getPets, petsSelector } from '../store/petsSlice'
 import { useEffect } from 'react'
 import { LoginPage } from '../pages/LoginPage/loginPage'
+import { ListCardsPage } from '../pages/ListCardsPage/listCardsPage'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       <main className="main">
         <Routes>
           <Route path='/' element={<HomePage></HomePage>}></Route>
+          <Route path='/pets' element={<ListCardsPage></ListCardsPage>}></Route>
           <Route path='/login' element={<LoginPage></LoginPage>}></Route>
         </Routes>
       </main>
