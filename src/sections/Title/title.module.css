@@ -1,5 +1,6 @@
 .blockBackground {
     background-color: var(--color-sand);
+    margin-top: 120px;
     margin-bottom: 40px;
 }
 

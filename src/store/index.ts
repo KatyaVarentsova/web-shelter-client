@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector, type TypedUseSelectorHook } from "react-redux";
-import petsSlice from "./petsSlice"
+import petsSlice from "./petsSlice";
+import modalSlice from "./modalSlice";
 
 const store = configureStore({
     reducer: {
         petsSlice: petsSlice,
+        modalSlice: modalSlice,
     }
 })
 

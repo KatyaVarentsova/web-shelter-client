@@ -1,5 +1,7 @@
 .blockBackground {
   background-color: var(--color-brown);
+  position: fixed;
+  width: 100%;
 }
 
 .header {
