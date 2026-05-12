@@ -1,37 +1,33 @@
-export type AnimalType = 'Кошка' | 'Собака';
-
-export type CharacterType = 'Спокойный' | 'Активный';
-
-export type GenderType = 'Мальчик' | 'Девочка';
-
-export type FurType = 'Короткая' | 'Длинная';
-
-export type PetStatus =
-  | 'В приюте'
-  | 'На передержке'
-  | 'В добрых руках'
-  | 'Умерло';
-
-export type Other = 
-  | 'Для семьи с детьми'        
-  | 'Ладит с собаками'       
-  | 'Ладит с кошками'        
-  | 'На передержке'; 
-
-export type Health = 'Здоровая' | 'Подготовка к операции' | 'На лечение'
-
 export interface IPet {
-  id: number;
-  type: AnimalType;           // кошка / собака
-  weight: number;             // вес в кг
-  character: CharacterType;   // спокойный / активный
-  age: number;                // возраст (в годах)
-  gender: GenderType;         // пол
-  fur: FurType;               // тип шерсти
-  description: string;        // описание
-  images: string[];           // массив картинок
-  status: PetStatus;          // статус животного
-  other: Other[];             // другие характеристики 
-  health: Health;             // здоровье 
-  comment?: string;           // комментарий
+    id: string,
+    nickname: string,
+    category: string,
+    birthday: string,
+    gender: string,
+    image: string,
+}
+
+export interface IImage {
+    id: string;
+    image: string;
+    number: number;
+}
+
+export interface IPetDetails {
+    id: string,
+    nickname: string,
+    category: string,
+    size: number,
+    character: string,
+    birthday: string,
+    gender: string,
+    wool: string,
+    for_family: boolean,
+    for_dogs: boolean,
+    for_cats: boolean,
+    is_guest: boolean,
+    description: string,
+    curator_id: string,
+    created_at: string,
+    images: IImage[]
 }

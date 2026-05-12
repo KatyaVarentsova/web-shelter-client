@@ -8,6 +8,7 @@ import { getPets, petsSelector } from '../store/petsSlice'
 import { useEffect } from 'react'
 import { LoginPage } from '../pages/LoginPage/loginPage'
 import { ListCardsPage } from '../pages/ListCardsPage/listCardsPage'
+import { PetPage } from '../pages/PetPage/petPage'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path='/' element={<HomePage></HomePage>}></Route>
           <Route path='/pets' element={<ListCardsPage></ListCardsPage>}></Route>
           <Route path='/login' element={<LoginPage></LoginPage>}></Route>
+          <Route path='/pet/:id' element={<PetPage/>} />
         </Routes>
       </main>
 

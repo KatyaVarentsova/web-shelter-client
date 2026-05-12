@@ -2,20 +2,23 @@ import { useState, type FC } from "react";
 import style from "./carouselCards.module.css"
 import { Card } from "../Card/card";
 import { Button } from "../Button/button";
-import { listAnimals } from "../../mockData/animals";
+import { useAppSelector } from "../../store";
+import { petsSelector } from "../../store/petsSlice";
 
 export const CarouselCards: FC = () => {
+    const pets = useAppSelector(petsSelector)
+
     const [firstItem, setFirstItem] = useState(0)
 
-    const visibleItems = listAnimals.slice(firstItem, firstItem + 4);
+    const visibleItems = pets.slice(firstItem, firstItem + 4);
 
     const handlerArrow = (arrow: string) => {
         const step = arrow === 'left' ? 4 : -4;
 
         setFirstItem((prev) => {
             let newIndex = prev + step;
-            if (newIndex >= listAnimals.length) return 0;
-            if (newIndex < 0) return listAnimals.length - 4;
+            if (newIndex >= pets.length) return 0;
+            if (newIndex < 0) return pets.length - 4;
             return newIndex;
         })
     }
@@ -35,10 +38,10 @@ export const CarouselCards: FC = () => {
                             return <Card
                                 key={item.id}
                                 id={item.id}
-                                name={item.name}
-                                age={item.age}
+                                nickname={item.nickname}
+                                birthday={item.birthday}
                                 gender={item.gender}
-                                type={item.type}
+                                category={item.category}
                                 image={item.image}
                             ></Card>
                         })

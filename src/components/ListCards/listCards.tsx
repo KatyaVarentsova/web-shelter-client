@@ -1,21 +1,24 @@
 import { type FC } from "react";
 import style from "./listCards.module.css"
 import { Card } from "../Card/card";
-import { listAnimals } from "../../mockData/animals";
+import { useAppSelector } from "../../store";
+import { petsSelector } from "../../store/petsSlice";
 
 export const ListCards: FC = () => {
+    const pets = useAppSelector(petsSelector)
+
 
     return (
         <div className={style.containerCards}>
             {
-                listAnimals.map((item) => {
+                pets.map((item) => {
                     return <Card
                         key={item.id}
                         id={item.id}
-                        name={item.name}
-                        age={item.age}
+                        nickname={item.nickname}
+                        birthday={item.birthday}
                         gender={item.gender}
-                        type={item.type}
+                        category={item.category}
                         image={item.image}
                     ></Card>
                 })
