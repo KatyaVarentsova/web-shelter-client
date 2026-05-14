@@ -2,6 +2,7 @@ import type { FC } from "react";
 import style from "./homePage.module.css";
 import { Title } from "../../sections/Title/title";
 import { CarouselCards } from "../../components/CarouselCards/carouselCards";
+import { Button } from "../../components/Button/button";
 
 
 export const HomePage: FC = () => {
@@ -14,6 +15,7 @@ export const HomePage: FC = () => {
                 <p className={style.text}>Мы существуем благодаря волонтёрам и неравнодушным людям. Наша цель — найти для каждого животного любящую семью и подарить ему дом, где его будут ждать и любить.</p>
             </div>
             <CarouselCards></CarouselCards>
+            <Button>Посмотреть всех животных</Button>
         </>
     )
 }

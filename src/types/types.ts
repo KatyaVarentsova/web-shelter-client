@@ -31,3 +31,19 @@ export interface IPetDetails {
     created_at: string,
     images: IImage[]
 }
+
+export interface IMessenger {
+    id: string,
+    messenger: string,
+    nickname: string,
+}
+
+export interface ICurator {
+    id: string,
+    last_name: string,
+    first_name: string,
+    description: string,
+    image: string,
+    phone_number: string,
+    messengers: IMessenger[]
+}

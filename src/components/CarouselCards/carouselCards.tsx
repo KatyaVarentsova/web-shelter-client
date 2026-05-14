@@ -1,7 +1,6 @@
 import { useState, type FC } from "react";
 import style from "./carouselCards.module.css"
 import { Card } from "../Card/card";
-import { Button } from "../Button/button";
 import { useAppSelector } from "../../store";
 import { petsSelector } from "../../store/petsSlice";
 
@@ -54,7 +53,6 @@ export const CarouselCards: FC = () => {
                     </svg>
                 </button>
             </div >
-            <Button>Посмотреть всех животных</Button>
         </section>
     )
 }
