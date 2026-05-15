@@ -33,7 +33,7 @@ export const FormPage: FC = () => {
                     </label>
                     <label className={style.labelForm}>
                         Ваш номер телефона
-                        <input className={style.inputForm} type="text" placeholder="8 (900) 999 99 99" value={phone} onChange={handlePhone}/>
+                        <input className={style.inputForm} type="text" placeholder="+7 (900) 999 99 99" value={phone} onChange={handlePhone}/>
                     </label>
                     <div className={style.groupForm}>
                         <p className={style.titleForm}>Желаемый способ связи</p>

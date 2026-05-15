@@ -15,6 +15,7 @@ export const Footer: FC = () => {
                         <nav className={style.nav}>
                             <Link className={style.link} to="/">О нас</Link>
                             <Link className={style.link} to="/pets">Каталог животных</Link>
+                            <Link className={style.link} to="/form">Оставить заявку</Link>
                         </nav>
                     </div>
 
