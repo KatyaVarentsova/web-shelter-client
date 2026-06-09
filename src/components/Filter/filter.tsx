@@ -137,9 +137,9 @@ export const Filter: FC = ({ }) => {
         })
     }
 
-    useEffect(() => {
-        console.log(stateForm)
-    }, [stateForm])
+    // useEffect(() => {
+    //     console.log(stateForm)
+    // }, [stateForm])
 
     return (
         <div className={style.filter}>

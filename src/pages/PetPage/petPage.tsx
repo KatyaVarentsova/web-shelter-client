@@ -12,6 +12,9 @@ import vk from '../../assets/vk.svg';
 import telegram from '../../assets/telegram.svg';
 import whatsapp from '../../assets/whatsapp.svg';
 import { CarouselCards } from "../../components/CarouselCards/carouselCards";
+import { isOpenFormSelector, setIsOpenForm } from "../../store/modalSlice";
+import { Modal } from "../../components/Modal/modal";
+import { RequestForm } from "../../components/RequestForm/requestForm";
 
 export const PetPage: FC = () => {
     const messengerIcons: Record<string, string> = {
@@ -22,8 +25,10 @@ export const PetPage: FC = () => {
 
     const pet = useAppSelector(petDetailsSelector)
     const curator = useAppSelector(curatorSelector)
+    const isOpenForm = useAppSelector(isOpenFormSelector)
 
     const dispatch = useAppDispatch()
+
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
@@ -36,8 +41,18 @@ export const PetPage: FC = () => {
         }
     }, [pet?.curator_id]);
 
+    useEffect(() => {
+        if (isOpenForm) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+    }, [isOpenForm])
+
     return (
         <>
+            {isOpenForm && <div className={style.overlay}></div>}
+
             <section className={style.sectionFirst}>
                 <h2 className={style.title}>{pet.nickname}</h2>
                 <div className={style.basicInformation}>
@@ -79,7 +94,7 @@ export const PetPage: FC = () => {
                             </div>
 
                         </div>
-                        <Button>Познакомиться</Button>
+                        <Button onClick={() => { dispatch(setIsOpenForm(true)) }}>Познакомиться</Button>
                     </div>
                 </div>
             </section>
@@ -98,7 +113,7 @@ export const PetPage: FC = () => {
                         {curator.messengers.map((item) => {
                             return item.messenger === 'mail' &&
                                 <span className={style.mailCurator} key={item.id}>
-                                    <img src={mail} alt=''/><span className={style.textCurator}>{item.nickname}</span>
+                                    <img src={mail} alt='' /><span className={style.textCurator}>{item.nickname}</span>
                                 </span>
                         })}
                         <p className={style.textCurator}>{curator.description}</p>
@@ -117,6 +132,12 @@ export const PetPage: FC = () => {
                 <CarouselCards></CarouselCards>
                 <Button>Перейти в каталог</Button>
             </section>
+
+            <Modal isOpen={isOpenForm} onClose={() => {
+                dispatch(setIsOpenForm(false))
+            }}>
+                <RequestForm petId={id} />
+            </Modal>
         </>
 
     )

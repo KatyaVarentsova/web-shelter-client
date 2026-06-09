@@ -6,6 +6,7 @@ import { formatPhone } from "../../utils/formatPhone";
 import type { ICreateRequest } from "../../types/types";
 import { useAppDispatch } from "../../store";
 import { createRequest } from "../../store/requestsSlice";
+import { RequestForm } from "../../components/RequestForm/requestForm";
 
 export const FormPage: FC = () => {
     const dispatch = useAppDispatch();
@@ -65,7 +66,7 @@ export const FormPage: FC = () => {
             });
 
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     };
 
@@ -107,109 +108,8 @@ export const FormPage: FC = () => {
                     />
                 </div>
 
-                <form
-                    className={style.contactForm}
-                    onSubmit={handleSubmit}
-                >
-                    <label className={style.labelForm}>
-                        Как вас зовут?
-
-                        <input
-                            className={style.inputForm}
-                            type="text"
-                            placeholder="Катя"
-                            value={form.name}
-                            onChange={(e) =>
-                                updateField("name", e.target.value)
-                            }
-                        />
-                    </label>
-
-                    <label className={style.labelForm}>
-                        Ваш номер телефона
-
-                        <input
-                            className={style.inputForm}
-                            type="text"
-                            placeholder="+7 (900) 999 99 99"
-                            value={form.contact}
-                            onChange={handlePhone}
-                        />
-                    </label>
-
-                    <div className={style.groupForm}>
-                        <p className={style.titleForm}>
-                            Желаемый способ связи
-                        </p>
-
-                        <label className={style.checkboxForm}>
-                            <input
-                                type="checkbox"
-                                checked={form.by_phone}
-                                onChange={(e) =>
-                                    updateField(
-                                        "by_phone",
-                                        e.target.checked
-                                    )
-                                }
-                            />
-
-                            <span className={style.customCheckbox}></span>
-                            <span>Звонок</span>
-                        </label>
-
-                        <label className={style.checkboxForm}>
-                            <input
-                                type="checkbox"
-                                checked={form.on_messenger}
-                                onChange={(e) =>
-                                    updateField(
-                                        "on_messenger",
-                                        e.target.checked
-                                    )
-                                }
-                            />
-
-                            <span className={style.customCheckbox}></span>
-                            <span>Мессенджер</span>
-                        </label>
-                    </div>
-
-                    <label className={style.labelForm}>
-                        Расскажите, кого вы ищите:
-
-                        <textarea
-                            className={style.textareaForm}
-                            value={form.comment}
-                            onChange={(e) =>
-                                updateField(
-                                    "comment",
-                                    e.target.value
-                                )
-                            }
-                        />
-                    </label>
-
-                    <label className={style.checkboxForm}>
-                        <input type="checkbox" checked={form.consent}
-                            onChange={(e) =>
-                                setForm({
-                                    ...form,
-                                    consent: e.target.checked
-                                })
-                            } />
-
-                        <span className={style.customCheckbox}></span>
-
-                        <span>
-                            Согласие на обработку персональных данных
-                        </span>
-                    </label>
-
-                    <Button>
-                        Отправить
-                    </Button>
-                </form>
+                <RequestForm></RequestForm>
+                
             </section>
         </div>
     );
