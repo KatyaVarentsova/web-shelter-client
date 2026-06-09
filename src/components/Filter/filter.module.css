@@ -1,0 +1,174 @@
+.filterButton {
+    position: fixed;
+    top: 140px;
+    left: 0;
+    z-index: 1000;
+    border-radius: 0 40px 40px 0;
+    height: 80px;
+    background-color: var(--color-caramel);
+    color: var(--color-white);
+    padding: 13px 30px 10px 20px;
+    transition: left 0.3s ease;
+}
+
+.openButton {
+    left: 475px;
+}
+
+.buttonText {
+    padding-bottom: 12px;
+}
+
+.panel {
+    position: fixed;
+    top: 124px;
+    left: -476px;
+    width: 476px;
+    height: calc(100vh - 124px);
+    background-color: var(--color-caramel);
+    padding: 20px;
+    transition: 0.3s;
+    z-index: 999;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-brown) transparent;
+}
+
+.panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.panel::-webkit-scrollbar-thumb {
+    background-color: var(--color-brown);
+    border-radius: 10px;
+}
+
+.open {
+    left: 0;
+}
+
+.filterBlock {
+    border: none;
+    margin: 0 40px 0 20px;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.filterTitle {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 32px;
+    color: var(--color-dark);
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.radio {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--color-white);
+}
+
+.radio input {
+    display: none;
+}
+
+.customRadio {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--color-caramel);
+    border-radius: 50%;
+    position: relative;
+    background-color: var(--color-white);
+}
+
+.radio input:checked+.customRadio::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-brown);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--color-white);
+}
+
+.checkbox input {
+    display: none;
+}
+
+.customCheckbox {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--color-caramel);
+    border-radius: 6px;
+    position: relative;
+    background-color: var(--color-white);
+}
+
+/* галочка */
+.checkbox input:checked+.customCheckbox::after {
+    content: "✔";
+    position: absolute;
+    top: -7px;
+    left: 4px;
+    font-size: 35px;
+    color: var(--color-brown);
+}
+
+.blockButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.resetButton {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    color: var(--color-white);
+    border-bottom: 1px solid var(--color-white);
+    align-self: center
+}
+
+.resetButton:hover {
+    color: var(--color-brown);
+    border-bottom: 1px solid var(--color-brown);
+}
+
+.resetButton:active {
+    border-bottom: 1px solid transparent;
+}
+
+.resetButton:focus {
+    color: var(--color-white);
+    border-bottom: 1px solid transparent;
+}

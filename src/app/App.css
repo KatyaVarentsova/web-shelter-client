@@ -14,3 +14,7 @@
   text-align: center;
   color: var(--color-dark);
 }
+
+.main {
+  flex: 1;
+}

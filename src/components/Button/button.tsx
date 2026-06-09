@@ -3,12 +3,14 @@ import style from "./button.module.css";
 
 interface IProps {
     children: ReactNode;
+    variant?: 'caramelButton'| 'brownButton' | 'whiteButton' | 'greenButton' | 'redButton';
+    onClick?: () => void;
 }
 
 
-export const Button: FC<IProps> = ({ children }) => {
+export const Button: FC<IProps> = ({ children, variant = 'caramelButton', onClick }) => {
 
     return (
-        <button className={style.button}>{children}</button>
+        <button className={`${style.button} ${style[variant]}`} onClick={onClick}>{children}</button>
     )
 }

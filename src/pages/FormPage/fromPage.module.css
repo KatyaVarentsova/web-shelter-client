@@ -1,0 +1,49 @@
+.background {
+    background-color: var(--color-cream);
+    padding-top: 80px;
+}
+
+.sectionForm {
+    max-width: 1440px;
+    margin: 120px auto 0;
+    display: flex;
+    gap: 40px;
+}
+
+.textBlockForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+}
+
+.headerForm {
+    margin: 0;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 120%;
+    color: var(--color-brown);
+    text-align: left;
+}
+
+.textForm {
+    margin: 0;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 32px;
+    color: var(--color-brown);
+    text-align: left;
+}
+
+.textUnderliningForm {
+    border-bottom: 3px solid var(--color-caramel);
+}
+
+.textAllocationForm {
+    color: var(--color-caramel);
+}
+
+.imageForm {
+    transform: rotate(16deg);
+}

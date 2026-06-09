@@ -1,16 +1,7 @@
-.sectionCards {
-    margin: 0 0 40px;
-}
-
-.containerSlider {
-    display: flex;
-    margin: 0 20px 20px;
-    gap: 25px;
-    align-items: center;
-    justify-content: space-between
-}
-
 .containerCards {
-    display: flex;
+    display: grid;
+    margin: 0 40px 40px;
+    grid-template-columns: repeat(4, 305px);
     gap: 20px;
+    justify-content: space-between;
 }
