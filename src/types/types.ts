@@ -50,13 +50,14 @@ export interface ICurator {
 
 export interface IRequest {
     id: string,
+    status: string,
     name: string,
     contact: string,
     by_phone: boolean,
     on_messenger: boolean,
     comment?: string,
     pet_id?: string,
-    created_at: string,
+    pet_nickname: string,
 }
 
 export interface ICreateRequest {

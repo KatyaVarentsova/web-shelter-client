@@ -1,0 +1,19 @@
+.blockComment {
+    display: flex;
+    flex-direction: column;
+}
+
+.link {
+    color: var(--color-dark);
+    border-bottom: 1px solid var(--color-dark);
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.link:hover {
+    color: var(--color-brown);
+    border-bottom-color: var(--color-brown);
+}
+
+.link:active {
+    opacity: 0.7;
+}
