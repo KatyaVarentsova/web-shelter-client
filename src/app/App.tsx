@@ -11,9 +11,13 @@ import { ListCardsPage } from '../pages/ListCardsPage/listCardsPage'
 import { PetPage } from '../pages/PetPage/petPage'
 import { FormPage } from '../pages/FormPage/formPage'
 import { closeAllModals } from '../store/modalSlice'
+import { PrivateRoute } from '../components/PrivateRoute/privateRoute'
+import { RequestsPage } from '../pages/RequestsPage/requestsPage'
+import { accessTokenSelector } from '../store/authSlice'
 
 function App() {
   const dispatch = useAppDispatch()
+  const token = useAppSelector(accessTokenSelector);
 
   useEffect(() => {
     dispatch(getPets())
@@ -30,15 +34,16 @@ function App() {
       <Header />
       <main className="main">
         <Routes>
-          <Route path='/' element={<HomePage></HomePage>}></Route>
-          <Route path='/pets' element={<ListCardsPage></ListCardsPage>}></Route>
-          <Route path='/login' element={<LoginPage></LoginPage>}></Route>
-          <Route path='/form' element={<FormPage></FormPage>}></Route>
-          <Route path='/pet/:id' element={<PetPage />} />
+          <Route path='/' element={<HomePage/>}></Route>
+          <Route path='/pets' element={<ListCardsPage/>}></Route>
+          <Route path='/login' element={<LoginPage/>}></Route>
+          <Route path='/form' element={<FormPage/>}></Route>
+          <Route path='/pet/:id' element={<PetPage/>} />
+          <Route path='/info/requests' element={<PrivateRoute><RequestsPage/></PrivateRoute>}/>
         </Routes>
       </main>
 
-      <Footer></Footer>
+      {!token && <Footer />}
     </>
   )
 }

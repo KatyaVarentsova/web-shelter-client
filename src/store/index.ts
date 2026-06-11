@@ -5,6 +5,7 @@ import modalSlice from "./modalSlice";
 import petDetailsSlice from "./petDetailsSlice";
 import curatorDetailsSlice from "./curatorDetailsSlice";
 import requestsSlice from "./requestsSlice";
+import authSlice from "./authSlice";
 
 const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
         petDetailsSlice: petDetailsSlice,
         curatorDetailsSlice: curatorDetailsSlice,
         requestsSlice: requestsSlice,
+        authSlice: authSlice,
     }
 })
 
