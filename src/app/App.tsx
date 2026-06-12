@@ -14,6 +14,7 @@ import { closeAllModals } from '../store/modalSlice'
 import { PrivateRoute } from '../components/PrivateRoute/privateRoute'
 import { RequestsPage } from '../pages/RequestsPage/requestsPage'
 import { accessTokenSelector } from '../store/authSlice'
+import { AdminHeader } from '../components/AdminHeader/adminHeader'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -32,6 +33,7 @@ function App() {
   return (
     <>
       <Header />
+      {token && <AdminHeader/>}
       <main className="main">
         <Routes>
           <Route path='/' element={<HomePage/>}></Route>

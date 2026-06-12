@@ -1,7 +1,6 @@
 .container {
-    margin: 0 auto;
+    margin: 220px auto 80px;
     max-width: 1440px;
-    margin-top: 200px;
 }
 
 .requestsTable {
