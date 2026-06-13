@@ -15,6 +15,7 @@ import { PrivateRoute } from '../components/PrivateRoute/privateRoute'
 import { RequestsPage } from '../pages/RequestsPage/requestsPage'
 import { accessTokenSelector } from '../store/authSlice'
 import { AdminHeader } from '../components/AdminHeader/adminHeader'
+import { PetsTablePage } from '../pages/PetsTablePage/petsTablePage'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -42,6 +43,8 @@ function App() {
           <Route path='/form' element={<FormPage/>}></Route>
           <Route path='/pet/:id' element={<PetPage/>} />
           <Route path='/info/requests' element={<PrivateRoute><RequestsPage/></PrivateRoute>}/>
+          <Route path='/info/dogs' element={<PrivateRoute><PetsTablePage category='dogs'/></PrivateRoute>}/>
+          <Route path='/info/cats' element={<PrivateRoute><PetsTablePage category='cats'/></PrivateRoute>}/>
         </Routes>
       </main>
 

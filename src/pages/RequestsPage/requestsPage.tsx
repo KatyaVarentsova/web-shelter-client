@@ -7,7 +7,6 @@ import { RequestRow } from "../../components/RequestRow/requestRow";
 export const RequestsPage: FC = () => {
     const dispatch = useAppDispatch()
     const requests = useAppSelector(requestsSelector)
-    console.log(requests)
 
     useEffect(() => {
         dispatch(getRequests())

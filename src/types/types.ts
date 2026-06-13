@@ -68,3 +68,12 @@ export interface ICreateRequest {
     comment?: string,
     pet_id?: string,
 }
+
+export interface IPetRow {
+    id: string,
+    nickname: string,
+    birthday: string,
+    gender: string,
+    last_name: string,
+    first_name: string
+}
