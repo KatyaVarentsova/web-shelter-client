@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { IPetRow } from "../types/types";
+import type { IPetForm, IPetRow } from "../types/types";
 
 interface IPetsState {
     pets: IPetRow[],
@@ -43,6 +43,36 @@ export const deletePetsTable = createAsyncThunk<IPetRow[], IDeletePetParams, { r
         },
         credentials: "include"
     })
+    const result: IPetRow[] = await response.json()
+    const dispatch = thunkObject.dispatch
+    if (result.length === 0) {
+        return thunkObject.rejectWithValue('Нет добавленных питомцев')
+    }
+    dispatch(savePetsTable(result))
+    return result
+})
+
+interface ICreatePetParams {
+    pet: IPetForm;
+    category: string;
+}
+
+export const createPet = createAsyncThunk<IPetRow[], ICreatePetParams>('petsTableSlice/createPet', async ({pet, category}, thunkObject) => {
+    const state = thunkObject.getState() as any;
+    const token = state.authSlice.accessToken;
+    const response = await fetch(`http://localhost:3000/api/pets/${category}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: token
+        },
+        credentials: "include",
+        body: JSON.stringify(pet)
+    })
+    if (!response.ok) {
+        throw new Error('Ошибка создания питомца');
+    }
+
     const result: IPetRow[] = await response.json()
     const dispatch = thunkObject.dispatch
     if (result.length === 0) {

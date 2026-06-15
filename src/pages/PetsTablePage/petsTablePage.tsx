@@ -3,21 +3,31 @@ import style from "./petsTablePage.module.css"
 import { useAppDispatch, useAppSelector } from "../../store";
 import { getPetsTable, petsTableSelector } from "../../store/petsTableSlice";
 import { PetRow } from "../../components/PetRow/petRow";
+import { Button } from "../../components/Button/button";
+import { useNavigate } from "react-router-dom";
 
 interface IProps {
     category: string
 }
 
-export const PetsTablePage: FC<IProps> = ({category}) => {
+export const PetsTablePage: FC<IProps> = ({ category }) => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate();
     const pets = useAppSelector(petsTableSelector)
 
     useEffect(() => {
         dispatch(getPetsTable(category))
     }, [category])
 
+    const handlerClick = () => {
+        navigate("/info/pet/create");
+    };
+
     return (
         <div className={style.container}>
+            <div className={style.blockButton}>
+                <Button onClick={handlerClick} variant="greenButton">Добавить питомца</Button>
+            </div>
             <table className={style.requestsTable}>
                 <thead>
                     <tr>
@@ -30,7 +40,7 @@ export const PetsTablePage: FC<IProps> = ({category}) => {
                 </thead>
                 <tbody>
                     {pets.map((pet) => (
-                     <PetRow key={pet.id} pet={pet} category={category}/>
+                        <PetRow key={pet.id} pet={pet} category={category} />
                     ))}
                 </tbody>
             </table>

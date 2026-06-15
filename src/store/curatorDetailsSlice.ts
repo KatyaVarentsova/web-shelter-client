@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { ICurator } from "../types/types";
+import type { ICurator, IShortCurators } from "../types/types";
 
 interface ICeratorDetailsState {
     curator: ICurator,
+    curators: IShortCurators[],
 }
 
 const curatorDetailsState: ICeratorDetailsState = {
@@ -25,7 +26,8 @@ const curatorDetailsState: ICeratorDetailsState = {
                 nickname: "https://vk.ru/k.grigoryeva11"
             }
         ]
-    }
+    },
+    curators: []
 }
 
 export const getCuratorDetails = createAsyncThunk<ICurator, string, { rejectValue: string }>('curatorDetailsSlice/getCuratorDetails', async (id: string, thunkObject) => {
@@ -40,6 +42,18 @@ export const getCuratorDetails = createAsyncThunk<ICurator, string, { rejectValu
     return result
 })
 
+export const getShortCurators = createAsyncThunk<IShortCurators[], void, { rejectValue: string }>('curatorDetailsSlice/getShortCurators', async (_, thunkObject) => {
+    const response = await fetch(`http://localhost:3000/api/curators/info`)
+    if (!response.ok) {
+        const errorData = await response.json();
+        return thunkObject.rejectWithValue(errorData.message || 'Ошибка загрузки данных о кураторах')
+    }
+    const result: IShortCurators[] = await response.json()
+    const dispatch = thunkObject.dispatch
+    dispatch(saveShortCurators(result))
+    return result
+})
+
 const curatorDetailsSlice = createSlice({
     name: 'curatorDetailsSlice',
     initialState: curatorDetailsState,
@@ -47,12 +61,16 @@ const curatorDetailsSlice = createSlice({
         saveCurator: (state, action: PayloadAction<ICurator>) => {
             state.curator = { ...action.payload }
         },
+        saveShortCurators: (state, action: PayloadAction<IShortCurators[]>) => {
+            state.curators = [...action.payload]
+        }
     },
     selectors: {
         curatorSelector: (state) => state.curator,
+        shortCuratorsSelector: (state) => state.curators,
     },
 })
 
 export default curatorDetailsSlice.reducer
-export const { saveCurator } = curatorDetailsSlice.actions
-export const { curatorSelector } = curatorDetailsSlice.selectors
+export const { saveCurator, saveShortCurators } = curatorDetailsSlice.actions
+export const { curatorSelector, shortCuratorsSelector } = curatorDetailsSlice.selectors

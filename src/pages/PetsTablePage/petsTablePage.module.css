@@ -3,6 +3,12 @@
     max-width: 1440px;
 }
 
+.blockButton {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
 .requestsTable {
     width: 100%;
     border-collapse: collapse;
