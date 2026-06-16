@@ -25,6 +25,7 @@ export const PetsTablePage: FC<IProps> = ({ category }) => {
 
     return (
         <div className={style.container}>
+            <h2 className={style.pageTitle}>{category === "dogs" ? "Собаки" : "Коты" }</h2>
             <div className={style.blockButton}>
                 <Button onClick={handlerClick} variant="greenButton">Добавить питомца</Button>
             </div>

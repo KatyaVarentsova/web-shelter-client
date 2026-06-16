@@ -4,6 +4,7 @@ import style from "./petRow.module.css"
 import { useAppDispatch } from "../../store";
 import { formatAge } from "../../utils/petAge";
 import { deletePetsTable } from "../../store/petsTableSlice";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
     pet: IPetRow;
@@ -12,8 +13,10 @@ interface Props {
 
 export const PetRow: FC<Props> = ({ pet, category }) => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate();
+
     function deleteHandler(id: string, category: string) {
-        dispatch(deletePetsTable({id, category}))
+        dispatch(deletePetsTable({ id, category }))
     }
     return (
         <tr>
@@ -23,7 +26,7 @@ export const PetRow: FC<Props> = ({ pet, category }) => {
             <td>{pet.last_name} {pet.first_name}</td>
 
             <td>
-                {/* <button>✏️</button> */}
+                <button onClick={() => navigate(`/info/pet/edit/${pet.id}`)}>✏️</button>
                 <button onClick={() => deleteHandler(pet.id, category)}>🗑️</button>
             </td>
         </tr>

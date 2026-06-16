@@ -82,6 +82,37 @@ export const createPet = createAsyncThunk<IPetRow[], ICreatePetParams>('petsTabl
     return result
 })
 
+interface IUpdatePetParams {
+    id: string;
+    pet: IPetForm;
+    category: string;
+}
+
+export const updatePet = createAsyncThunk<IPetRow[], IUpdatePetParams>('petsTableSlice/updatePet', async ({id, pet, category}, thunkObject) => {
+    const state = thunkObject.getState() as any;
+    const token = state.authSlice.accessToken;
+    const response = await fetch(`http://localhost:3000/api/pets/${category}/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: token
+        },
+        credentials: "include",
+        body: JSON.stringify(pet)
+    })
+    if (!response.ok) {
+        throw new Error('Ошибка редактирования питомца');
+    }
+
+    const result: IPetRow[] = await response.json()
+    const dispatch = thunkObject.dispatch
+    if (result.length === 0) {
+        return thunkObject.rejectWithValue('Нет добавленных питомцев')
+    }
+    dispatch(savePetsTable(result))
+    return result
+})
+
 const petsTableSlice = createSlice({
     name: 'petsTableSlice',
     initialState: petsTableState,

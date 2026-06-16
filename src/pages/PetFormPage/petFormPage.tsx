@@ -3,18 +3,17 @@ import style from './petFormPage.module.css';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { getShortCurators, shortCuratorsSelector } from '../../store/curatorDetailsSlice';
 import type { IPetForm } from '../../types/types';
-import { createPet } from '../../store/petsTableSlice';
-import { useNavigate } from 'react-router-dom';
+import { createPet, updatePet } from '../../store/petsTableSlice';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '../../components/Button/button';
+import { getPetDetails, petDetailsSelector } from '../../store/petDetailsSlice';
 
 
 export const PetFormPage: FC = () => {
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate();
-    const initialForm = {
+    let initialForm = {
         nickname: '',
         category: '',
-        size: '',
+        size: 0,
         character: '',
         birthday: '',
         gender: '',
@@ -32,6 +31,47 @@ export const PetFormPage: FC = () => {
         image_4: '',
         image_5: '',
     }
+
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate();
+    const { id } = useParams<{ id: string }>();
+    const pet = useAppSelector(petDetailsSelector)
+
+    useEffect(() => {
+        id && dispatch(getPetDetails(id))
+    }, [id]);
+
+    useEffect(() => {
+        if (!pet || !id) return;
+
+        initialForm = {
+            nickname: pet.nickname || '',
+            category: pet.category || '',
+            size: pet.size || 0,
+            character: pet.character || '',
+            birthday: pet.birthday
+                ? new Date(pet.birthday)
+                    .toISOString()
+                    .split('T')[0]
+                : '',
+            gender: pet.gender || '',
+            wool: pet.wool || '',
+            for_family: pet.for_family || false,
+            for_dogs: pet.for_dogs || false,
+            for_cats: pet.for_cats || false,
+            is_guest: pet.is_guest || false,
+            description: pet.description || '',
+            curator_id: pet.curator_id || '',
+
+            image_1: pet.images?.[0]?.image || '',
+            image_2: pet.images?.[1]?.image || '',
+            image_3: pet.images?.[2]?.image || '',
+            image_4: pet.images?.[3]?.image || '',
+            image_5: pet.images?.[4]?.image || '',
+        }
+
+        setForm(initialForm);
+    }, [pet, id]);
 
     useEffect(() => {
         dispatch(getShortCurators())
@@ -63,10 +103,18 @@ export const PetFormPage: FC = () => {
         e.preventDefault();
 
         try {
-            await dispatch(createPet({
-                pet: { ...form },
-                category: 'dogs',
-            })).unwrap()
+            if (id) {
+                await dispatch(updatePet({
+                    id: id,
+                    pet: form,
+                    category: 'dogs'
+                })).unwrap();
+            } else {
+                await dispatch(createPet({
+                    pet: form,
+                    category: 'dogs',
+                })).unwrap();
+            }
 
             setForm(initialForm);
 
@@ -81,6 +129,14 @@ export const PetFormPage: FC = () => {
         setForm(initialForm);
     }
 
+    const cancelHandler = () => {
+        if (form.category === 'Собака') {
+            navigate(`/info/dogs`);
+        } else {
+            navigate(`/info/cats`);
+        }
+    }
+
     return (
         <div className={style.background}>
             <section className={style.sectionForm}>
@@ -88,9 +144,9 @@ export const PetFormPage: FC = () => {
                     className={style.contactForm}
                     onSubmit={handleSubmit}
                 >
-                    <h1 className={style.pageTitle}>
+                    <h2 className={style.pageTitle}>
                         Добавление питомца
-                    </h1>
+                    </h2>
 
                     <div className={style.formRow}>
                         <label className={style.labelForm}>
@@ -392,8 +448,12 @@ export const PetFormPage: FC = () => {
                     </fieldset>
 
                     <div className={style.blockButtons}>
-                        <Button variant="greenButton">Сохранить</Button>
-                        <Button variant="whiteButton" onClick={resetHandler}>Очистить форму</Button>
+                        <Button type="submit" variant="greenButton">Сохранить</Button>
+                        {id ?
+                            <Button type="button" variant="whiteButton" onClick={cancelHandler}>Отмена</Button>
+                            :
+                            <Button type="button" variant="whiteButton" onClick={resetHandler}>Очистить форму</Button>
+                        }
                     </div>
 
                 </form>

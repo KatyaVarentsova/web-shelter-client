@@ -14,6 +14,7 @@ export const RequestsPage: FC = () => {
 
     return (
         <div className={style.container}>
+            <h2 className={style.pageTitle}>Заявки</h2>
             <table className={style.requestsTable}>
                 <thead>
                     <tr>

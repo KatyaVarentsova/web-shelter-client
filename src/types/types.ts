@@ -35,7 +35,7 @@ export interface IPetDetails {
 export interface IPetForm {
     nickname: string;
     category: string;
-    size: string;
+    size: number;
     character: string;
     birthday: string;
     gender: string;

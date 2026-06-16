@@ -3,6 +3,14 @@
     max-width: 1440px;
 }
 
+.pageTitle {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: 20px;
+}
+
 .requestsTable {
     width: 100%;
     border-collapse: collapse;
