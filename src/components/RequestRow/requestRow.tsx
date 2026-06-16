@@ -1,21 +1,74 @@
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import type { IRequest } from "../../types/types";
 import style from "./requestRow.module.css"
-import { useAppDispatch } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { deleteRequest } from "../../store/requestsSlice";
+import { accessTokenSelector } from "../../store/authSlice";
 
 interface Props {
     request: IRequest;
 }
 
+const statuses = [
+    'новый',
+    'в работе',
+    'успешно завершено',
+    'в архиве',
+];
+
 export const RequestRow: FC<Props> = ({ request }) => {
     const dispatch = useAppDispatch()
+    const token = useAppSelector(accessTokenSelector);
     function deleteHandler(id: string) {
         dispatch(deleteRequest(id))
     }
+
+    const [isEditing, setIsEditing] = useState(false);
+    const [status, setStatus] = useState(request.status);
+
+    const handleChangeStatus = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newStatus = e.target.value;
+        setStatus(newStatus);
+        setIsEditing(false);
+
+        await fetch(`http://localhost:3000/api/requests/${request.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: token
+            },
+            credentials: "include",
+            body: JSON.stringify({
+                status: newStatus,
+            }),
+        });
+    };
+
     return (
         <tr>
-            <td>{request.status}</td>
+            <td>
+                {isEditing ? (
+                    <select
+                        value={status}
+                        className={style.statusSelect}
+                        onChange={handleChangeStatus}
+                        autoFocus
+                    >
+                        {statuses.map(item => (
+                            <option key={item} value={item}>
+                                {item}
+                            </option>
+                        ))}
+                    </select>
+                ) : (
+                    <span
+                        onClick={() => setIsEditing(true)}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        {status}
+                    </span>
+                )}
+            </td>
             <td>{request.name}</td>
             <td>{request.contact}</td>
 
@@ -23,7 +76,7 @@ export const RequestRow: FC<Props> = ({ request }) => {
                 {(request.by_phone && !request.on_messenger) && "звонок"}
                 {(!request.by_phone && request.on_messenger) && "мессенджер"}
                 {(request.by_phone && request.on_messenger) && "звонок, мессенджер"}
-                
+
             </td>
 
             <td>
