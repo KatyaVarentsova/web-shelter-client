@@ -1,0 +1,133 @@
+import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { IPetForm, IPetRow } from "../types/types";
+
+interface IPetsState {
+    pets: IPetRow[],
+}
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+const petsTableState: IPetsState = {
+    pets: []
+}
+
+export const getPetsTable = createAsyncThunk<IPetRow[], string, { rejectValue: string }>('petsTableSlice/getPetsTable', async (category: string, thunkObject) => {
+    const state = thunkObject.getState() as any;
+    const token = state.authSlice.accessToken;
+    const response = await fetch(`${API_URL}/api/pets/${category}`, {
+        method: "GET",
+        headers: {
+            authorization: token
+        },
+        credentials: "include"
+    })
+    const result: IPetRow[] = await response.json()
+    const dispatch = thunkObject.dispatch
+    if (result.length === 0) {
+        return thunkObject.rejectWithValue('Нет добавленных питомцев')
+    }
+    dispatch(savePetsTable(result))
+    return result
+})
+
+interface IDeletePetParams {
+    id: string;
+    category: string;
+}
+
+export const deletePetsTable = createAsyncThunk<IPetRow[], IDeletePetParams, { rejectValue: string }>('petsTableSlice/deletePetsTable', async ({ id, category }, thunkObject) => {
+    const state = thunkObject.getState() as any;
+    const token = state.authSlice.accessToken;
+    const response = await fetch(`${API_URL}/api/pets/${category}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            authorization: token
+        },
+        credentials: "include"
+    })
+    const result: IPetRow[] = await response.json()
+    const dispatch = thunkObject.dispatch
+    if (result.length === 0) {
+        return thunkObject.rejectWithValue('Нет добавленных питомцев')
+    }
+    dispatch(savePetsTable(result))
+    return result
+})
+
+interface ICreatePetParams {
+    pet: IPetForm;
+    category: string;
+}
+
+export const createPet = createAsyncThunk<IPetRow[], ICreatePetParams>('petsTableSlice/createPet', async ({pet, category}, thunkObject) => {
+    const state = thunkObject.getState() as any;
+    const token = state.authSlice.accessToken;
+    const response = await fetch(`${API_URL}/api/pets/${category}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: token
+        },
+        credentials: "include",
+        body: JSON.stringify(pet)
+    })
+    if (!response.ok) {
+        throw new Error('Ошибка создания питомца');
+    }
+
+    const result: IPetRow[] = await response.json()
+    const dispatch = thunkObject.dispatch
+    if (result.length === 0) {
+        return thunkObject.rejectWithValue('Нет добавленных питомцев')
+    }
+    dispatch(savePetsTable(result))
+    return result
+})
+
+interface IUpdatePetParams {
+    id: string;
+    pet: IPetForm;
+    category: string;
+}
+
+export const updatePet = createAsyncThunk<IPetRow[], IUpdatePetParams>('petsTableSlice/updatePet', async ({id, pet, category}, thunkObject) => {
+    const state = thunkObject.getState() as any;
+    const token = state.authSlice.accessToken;
+    const response = await fetch(`${API_URL}/api/pets/${category}/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: token
+        },
+        credentials: "include",
+        body: JSON.stringify(pet)
+    })
+    if (!response.ok) {
+        throw new Error('Ошибка редактирования питомца');
+    }
+
+    const result: IPetRow[] = await response.json()
+    const dispatch = thunkObject.dispatch
+    if (result.length === 0) {
+        return thunkObject.rejectWithValue('Нет добавленных питомцев')
+    }
+    dispatch(savePetsTable(result))
+    return result
+})
+
+const petsTableSlice = createSlice({
+    name: 'petsTableSlice',
+    initialState: petsTableState,
+    reducers: {
+        savePetsTable: (state, action: PayloadAction<IPetRow[]>) => {
+            state.pets = [...action.payload]
+        },
+    },
+    selectors: {
+        petsTableSelector: (state) => state.pets,
+    },
+})
+
+export default petsTableSlice.reducer
+export const { savePetsTable } = petsTableSlice.actions
+export const { petsTableSelector } = petsTableSlice.selectors

@@ -25,6 +25,7 @@ html, body, #root {
   --color-gray: #9B9B9B;        /* серый */
   --color-pink: #E9B4A4;        /* мягкий розовый */
   --color-white: #FCFCFC;       /* белый */
+  --color-green: #00B100;
 }
 
 a {

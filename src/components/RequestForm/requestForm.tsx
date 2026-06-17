@@ -222,7 +222,7 @@ export const RequestForm: FC<RequestFormProps> = ({
                 </label>
             )}
 
-            <Button>Отправить</Button>
+            <Button type="submit">Отправить</Button>
 
             <label
                 className={style.checkboxForm}

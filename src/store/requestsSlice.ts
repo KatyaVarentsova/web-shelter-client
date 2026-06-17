@@ -5,12 +5,22 @@ interface IRequestsState {
     requests: IRequest[],
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const requestsState: IRequestsState = {
     requests: []
 }
 
 export const getRequests = createAsyncThunk<IRequest[], void, { rejectValue: string }>('requestsSlice/getRequests', async (_, thunkObject) => {
-    const response = await fetch('http://localhost:3000/api/requests')
+    const state = thunkObject.getState() as any;
+    const token = state.authSlice.accessToken;
+    const response = await fetch(`${API_URL}/api/requests`, {
+        method: "GET",
+        headers: {
+            authorization: token
+        },
+        credentials: "include"
+    })
     const result: IRequest[] = await response.json()
     const dispatch = thunkObject.dispatch
     if (result.length === 0) {
@@ -21,7 +31,7 @@ export const getRequests = createAsyncThunk<IRequest[], void, { rejectValue: str
 })
 
 export const createRequest = createAsyncThunk<IRequest, ICreateRequest>('requestsSlice/createRequest', async (request) => {
-    const response = await fetch('http://localhost:3000/api/requests', {
+    const response = await fetch(`${API_URL}/api/requests`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -29,10 +39,29 @@ export const createRequest = createAsyncThunk<IRequest, ICreateRequest>('request
         body: JSON.stringify(request)
     })
     if (!response.ok) {
-      throw new Error('Ошибка создания заявки');
+        throw new Error('Ошибка создания заявки');
     }
 
     return await response.json();
+})
+
+export const deleteRequest = createAsyncThunk<IRequest[], string, { rejectValue: string }>('requestsSlice/deleteRequest', async (id: string, thunkObject) => {
+    const state = thunkObject.getState() as any;
+    const token = state.authSlice.accessToken;
+    const response = await fetch(`${API_URL}/api/requests/${id}`, {
+        method: 'DELETE',
+        headers: {
+            authorization: token
+        },
+        credentials: "include"
+    })
+    const result: IRequest[] = await response.json()
+    const dispatch = thunkObject.dispatch
+    if (result.length === 0) {
+        return thunkObject.rejectWithValue('Нет добавленных заявок')
+    }
+    dispatch(saveRequests(result))
+    return result
 })
 
 const requestsSlice = createSlice({

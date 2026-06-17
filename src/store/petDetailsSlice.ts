@@ -5,6 +5,8 @@ interface IPetDetailsState {
     pet: IPetDetails,
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const petDetailsState: IPetDetailsState = {
     pet: {
         id: "fe8c148b-a3bd-498b-9e2e-8211ad069a8c",
@@ -38,7 +40,7 @@ const petDetailsState: IPetDetailsState = {
 }
 
 export const getPetDetails = createAsyncThunk<IPetDetails, string, { rejectValue: string }>('petDetailsSlice/getPetDetails', async (id: string, thunkObject) => {
-    const response = await fetch(`http://localhost:3000/api/pets/${id}`)
+    const response = await fetch(`${API_URL}/api/pets/${id}`)
     if (!response.ok) {
         const errorData = await response.json();
         return thunkObject.rejectWithValue(errorData.message || 'Ошибка загрузки данных о работнике')

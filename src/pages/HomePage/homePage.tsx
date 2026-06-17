@@ -3,9 +3,11 @@ import style from "./homePage.module.css";
 import { CarouselCards } from "../../components/CarouselCards/carouselCards";
 import { Button } from "../../components/Button/button";
 import image from '../../assets/mainPicture.png';
+import { useNavigate } from "react-router-dom";
 
 
 export const HomePage: FC = () => {
+    const navigate = useNavigate();
 
     return (
         <div className={style.homePage}>
@@ -14,7 +16,7 @@ export const HomePage: FC = () => {
                 <div>
                     <h1 className={style.titleText}>Официальный сайт твоего приюта</h1>
                     <p className="textFatty">Здесь находят дом и любовь</p>
-                    <Button>Найти питомца</Button>
+                    <Button onClick={() => {navigate("/pets")}}>Найти питомца</Button>
                 </div>
                 <div>
                     <img src={image} alt='Собаки и коты'></img>
@@ -26,7 +28,7 @@ export const HomePage: FC = () => {
                 <p className={style.text}>Мы существуем благодаря волонтёрам и неравнодушным людям. Наша цель — найти для каждого животного любящую семью и подарить ему дом, где его будут ждать и любить.</p>
             </div>
             <CarouselCards></CarouselCards>
-            <Button>Посмотреть всех животных</Button>
+            <Button onClick={() => {navigate("/pets")}}>Посмотреть всех животных</Button>
         </div>
     )
 }

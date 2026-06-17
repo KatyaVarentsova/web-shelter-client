@@ -71,13 +71,6 @@ export const Filter: FC = ({ }) => {
         }
     ];
 
-    const filtersCheckbox: string[] = [
-        'Для семьи с детьми',
-        'Ладит с собаками',
-        'Ладит с кошками',
-        'На передержке'
-    ];
-
     const dispatch = useAppDispatch();
     const isOpen = useAppSelector(isOpenFilterSelector);
 

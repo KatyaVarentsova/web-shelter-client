@@ -36,3 +36,10 @@
     font-size: 24px;
     color: var(--color-brown);
 }
+
+.logoutContainer {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

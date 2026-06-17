@@ -1,7 +1,7 @@
 import { useEffect, type FC } from "react";
 import style from "./petPage.module.css"
 import { useAppDispatch, useAppSelector } from "../../store";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getPetDetails, petDetailsSelector } from "../../store/petDetailsSlice";
 import { SliderImages } from "../../components/SliderImages/sliderImages";
 import { Button } from "../../components/Button/button";
@@ -17,6 +17,7 @@ import { Modal } from "../../components/Modal/modal";
 import { RequestForm } from "../../components/RequestForm/requestForm";
 
 export const PetPage: FC = () => {
+    const navigate = useNavigate();
     const messengerIcons: Record<string, string> = {
         telegram,
         whatsapp,
@@ -130,7 +131,7 @@ export const PetPage: FC = () => {
             <section className={style.section}>
                 <h3 className={style.titleCard}>Вам также могут подойти: </h3>
                 <CarouselCards></CarouselCards>
-                <Button>Перейти в каталог</Button>
+                <Button onClick={() => {navigate("/pets")}}>Перейти в каталог</Button>
             </section>
 
             <Modal isOpen={isOpenForm} onClose={() => {

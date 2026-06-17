@@ -1,75 +1,9 @@
-import { useState, type FC } from "react";
+import { type FC } from "react";
 import formPicture from "../../assets/formPicture.png";
 import style from "./fromPage.module.css";
-import { Button } from "../../components/Button/button";
-import { formatPhone } from "../../utils/formatPhone";
-import type { ICreateRequest } from "../../types/types";
-import { useAppDispatch } from "../../store";
-import { createRequest } from "../../store/requestsSlice";
 import { RequestForm } from "../../components/RequestForm/requestForm";
 
 export const FormPage: FC = () => {
-    const dispatch = useAppDispatch();
-
-    const [form, setForm] = useState<ICreateRequest & { consent: boolean }>({
-        name: "",
-        contact: "",
-        by_phone: false,
-        on_messenger: false,
-        comment: "",
-        consent: false
-    });
-
-    const updateField = <K extends keyof ICreateRequest>(
-        field: K,
-        value: ICreateRequest[K]
-    ) => {
-        setForm((prev) => ({
-            ...prev,
-            [field]: value
-        }));
-    };
-
-    const handlePhone = (
-        e: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        const formatted = formatPhone(e.target.value);
-
-        updateField("contact", formatted);
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        if (!form.by_phone && !form.on_messenger) {
-            alert("Выберите хотя бы один способ связи");
-            return;
-        }
-
-        if (!form.consent) {
-            alert("Необходимо согласие на обработку данных");
-            return;
-        }
-
-        try {
-            const { consent, ...payload } = form;
-
-            await dispatch(createRequest(payload)).unwrap();
-
-            setForm({
-                name: '',
-                contact: '',
-                by_phone: false,
-                on_messenger: false,
-                comment: '',
-                consent: false,
-            });
-
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
     return (
         <div className={style.background}>
             <section className={style.sectionForm}>

@@ -1,0 +1,41 @@
+.container {
+    margin: 220px auto 80px;
+    max-width: 1440px;
+}
+
+.pageTitle {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: 20px;
+}
+
+.requestsTable {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.requestsTable th,
+.requestsTable td {
+    width: auto;
+    padding: 12px 16px;
+    background-color: var(--color-cream);
+    color: var(--color-dark);
+    border: 1px solid var(--color-brown);
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+}
+
+.requestsTable th {
+    background-color: var(--color-brown);
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.requests-table tbody tr:hover td {
+    background-color: #a06a35;
+}

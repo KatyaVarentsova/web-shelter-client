@@ -32,6 +32,27 @@ export interface IPetDetails {
     images: IImage[]
 }
 
+export interface IPetForm {
+    nickname: string;
+    category: string;
+    size: number;
+    character: string;
+    birthday: string;
+    gender: string;
+    wool: string;
+    for_family: boolean;
+    for_dogs: boolean;
+    for_cats: boolean;
+    is_guest: boolean;
+    description: string;
+    curator_id: string;
+    image_1: string,
+    image_2: string,
+    image_3: string,
+    image_4: string,
+    image_5: string,
+}
+
 export interface IMessenger {
     id: string,
     messenger: string,
@@ -48,15 +69,23 @@ export interface ICurator {
     messengers: IMessenger[]
 }
 
+export interface IShortCurators {
+    id: string,
+    last_name: string,
+    first_name: string,
+    middle_name: string
+}
+
 export interface IRequest {
     id: string,
+    status: string,
     name: string,
     contact: string,
     by_phone: boolean,
     on_messenger: boolean,
     comment?: string,
     pet_id?: string,
-    created_at: string,
+    pet_nickname: string,
 }
 
 export interface ICreateRequest {
@@ -66,4 +95,13 @@ export interface ICreateRequest {
     on_messenger: boolean,
     comment?: string,
     pet_id?: string,
+}
+
+export interface IPetRow {
+    id: string,
+    nickname: string,
+    birthday: string,
+    gender: string,
+    last_name: string,
+    first_name: string
 }

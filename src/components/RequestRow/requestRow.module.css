@@ -1,0 +1,32 @@
+.blockComment {
+    display: flex;
+    flex-direction: column;
+}
+
+.statusSelect {
+    cursor: pointer;
+    border: 2px solid var(--color-brown);
+    padding: 10px 0;
+    width: 120px;
+    border-radius: 10px;
+    background: var( --color-white);
+    color: var(--color-dark);
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+}
+
+.link {
+    color: var(--color-dark);
+    border-bottom: 1px solid var(--color-dark);
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.link:hover {
+    color: var(--color-brown);
+    border-bottom-color: var(--color-brown);
+}
+
+.link:active {
+    opacity: 0.7;
+}

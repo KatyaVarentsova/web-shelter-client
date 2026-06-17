@@ -21,7 +21,7 @@ export const ListCardsPage: FC = () => {
             {isOpenFilter && <div className={style.overlay}></div>}
 
             <section className={style.sectionCards}>
-                <Filter />
+                {/* <Filter /> */}
                 <h2 className={style.title}>Каталог собак и кошек </h2>
                 <div className={style.sectionText}>
                     <p className={style.text}>Подберите себе питомца по фильтрам на странице или доверьтесь судьбе, а кураторы познакомят вас лично и помогут в период адаптации дома.</p>
