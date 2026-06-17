@@ -7,6 +7,11 @@ import { petsSelector } from "../../store/petsSlice";
 export const ListCards: FC = () => {
     const pets = useAppSelector(petsSelector)
 
+    if (!pets.length) {
+        return <p className={style.emptyMessage}>
+            К сожалению, мы не нашли для вас питомца, попробуйте изменить фильтр
+        </p>
+    }
 
     return (
         <div className={style.containerCards}>

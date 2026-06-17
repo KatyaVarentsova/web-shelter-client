@@ -3,19 +3,10 @@ import style from "./filter.module.css";
 import { Button } from "../Button/button";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { isOpenFilterSelector, setIsOpenFilter } from "../../store/modalSlice";
+import type { IFilter } from "../../types/types";
+import { filterSelector, postPetFiltering, saveFilter } from "../../store/petsSlice";
 
-interface IForm {
-    type: string,
-    size: string,
-    character: string,
-    age: string,
-    gender: string,
-    wool: string,
-    other: string[],
-}
-
-
-export const Filter: FC = ({ }) => {
+export const Filter: FC = () => {
     const filtersRadio = [
         {
             type: 'radio',
@@ -73,32 +64,10 @@ export const Filter: FC = ({ }) => {
 
     const dispatch = useAppDispatch();
     const isOpen = useAppSelector(isOpenFilterSelector);
+    const filter = useAppSelector(filterSelector);
+    const [stateForm, setStateForm] = useState<IFilter>(filter)
 
-    const [stateForm, setStateForm] = useState<IForm>({
-        type: '',
-        size: '',
-        character: '',
-        age: '',
-        gender: '',
-        wool: '',
-        other: [],
-    })
-
-    const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-
-        setStateForm({
-            type: '',
-            size: '',
-            character: '',
-            age: '',
-            gender: '',
-            wool: '',
-            other: [],
-        })
-    }
-
-    const changeHandler = (type: string, key: keyof IForm, value: string) => {
+    const changeHandler = (type: string, key: keyof IFilter, value: string) => {
         type === 'radio' ?
             setStateForm({
                 ...stateForm,
@@ -110,13 +79,16 @@ export const Filter: FC = ({ }) => {
             })
     };
 
-    const searchHandler = () => {
-        dispatch(setIsOpenFilter(!isOpen))
-    }
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(postPetFiltering(stateForm))
+    dispatch(saveFilter(stateForm));
+    dispatch(setIsOpenFilter(false));
+};
 
-    const fateHandler = () => {
-        dispatch(setIsOpenFilter(!isOpen))
-    }
+    // const fateHandler = () => {
+    //     dispatch(setIsOpenFilter(!isOpen))
+    // }
 
     const resetHandler = () => {
         setStateForm({
@@ -172,10 +144,10 @@ export const Filter: FC = ({ }) => {
                                     value={option}
                                     checked={
                                         filter.type === 'radio'
-                                            ? stateForm[filter.name as keyof IForm] === option
+                                            ? stateForm[filter.name as keyof IFilter] === option
                                             : stateForm.other.includes(option)
                                     }
-                                    onChange={() => changeHandler(filter.type, filter.name as keyof IForm, option)} />
+                                    onChange={() => changeHandler(filter.type, filter.name as keyof IFilter, option)} />
                                 <span className={
                                     filter.type === 'radio'
                                         ? style.customRadio
@@ -189,9 +161,9 @@ export const Filter: FC = ({ }) => {
                 ))}
 
                 <div className={style.blockButtons}>
-                    <Button variant="brownButton" onClick={searchHandler}>Найти по фильтру</Button>
-                    <Button variant="whiteButton" onClick={fateHandler}>Довериться судьбе</Button>
-                    <button className={style.resetButton} onClick={resetHandler}>Сбросить фильтр</button>
+                    <Button type="submit" variant="brownButton">Найти по фильтру</Button>
+                    {/* <Button variant="whiteButton" onClick={fateHandler}>Довериться судьбе</Button> */}
+                    <button type="button" className={style.resetButton} onClick={resetHandler}>Сбросить фильтр</button>
                 </div>
 
             </form>

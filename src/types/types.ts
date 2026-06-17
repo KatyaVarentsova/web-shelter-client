@@ -7,6 +7,16 @@ export interface IPet {
     image: string,
 }
 
+export interface IFilter {
+    type: string,
+    size: string,
+    character: string,
+    age: string,
+    gender: string,
+    wool: string,
+    other: string[],
+}
+
 export interface IImage {
     id: string;
     image: string;
