@@ -5,6 +5,8 @@ interface IPetsState {
     pets: IPetRow[],
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const petsTableState: IPetsState = {
     pets: []
 }
@@ -12,7 +14,7 @@ const petsTableState: IPetsState = {
 export const getPetsTable = createAsyncThunk<IPetRow[], string, { rejectValue: string }>('petsTableSlice/getPetsTable', async (category: string, thunkObject) => {
     const state = thunkObject.getState() as any;
     const token = state.authSlice.accessToken;
-    const response = await fetch(`http://localhost:3000/api/pets/${category}`, {
+    const response = await fetch(`${API_URL}/api/pets/${category}`, {
         method: "GET",
         headers: {
             authorization: token
@@ -36,7 +38,7 @@ interface IDeletePetParams {
 export const deletePetsTable = createAsyncThunk<IPetRow[], IDeletePetParams, { rejectValue: string }>('petsTableSlice/deletePetsTable', async ({ id, category }, thunkObject) => {
     const state = thunkObject.getState() as any;
     const token = state.authSlice.accessToken;
-    const response = await fetch(`http://localhost:3000/api/pets/${category}/${id}`, {
+    const response = await fetch(`${API_URL}/api/pets/${category}/${id}`, {
         method: 'DELETE',
         headers: {
             authorization: token
@@ -60,7 +62,7 @@ interface ICreatePetParams {
 export const createPet = createAsyncThunk<IPetRow[], ICreatePetParams>('petsTableSlice/createPet', async ({pet, category}, thunkObject) => {
     const state = thunkObject.getState() as any;
     const token = state.authSlice.accessToken;
-    const response = await fetch(`http://localhost:3000/api/pets/${category}`, {
+    const response = await fetch(`${API_URL}/api/pets/${category}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -91,7 +93,7 @@ interface IUpdatePetParams {
 export const updatePet = createAsyncThunk<IPetRow[], IUpdatePetParams>('petsTableSlice/updatePet', async ({id, pet, category}, thunkObject) => {
     const state = thunkObject.getState() as any;
     const token = state.authSlice.accessToken;
-    const response = await fetch(`http://localhost:3000/api/pets/${category}/${id}`, {
+    const response = await fetch(`${API_URL}/api/pets/${category}/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

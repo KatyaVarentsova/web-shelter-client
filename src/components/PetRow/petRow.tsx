@@ -12,6 +12,7 @@ interface Props {
 }
 
 export const PetRow: FC<Props> = ({ pet, category }) => {
+    const CLIENT_URL = import.meta.env.VITE_CLIENT_URL;
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
 
@@ -20,7 +21,7 @@ export const PetRow: FC<Props> = ({ pet, category }) => {
     }
     return (
         <tr>
-            <td><span><a className={style.link} href={`http://localhost:5173/pet/${pet.id}`} target="_blank" rel="noopener noreferrer">{pet.nickname}</a></span></td>
+            <td><span><a className={style.link} href={`${CLIENT_URL}/pet/${pet.id}`} target="_blank" rel="noopener noreferrer">{pet.nickname}</a></span></td>
             <td>{formatAge(pet.birthday)}</td>
             <td>{pet.gender}</td>
             <td>{pet.last_name} {pet.first_name}</td>

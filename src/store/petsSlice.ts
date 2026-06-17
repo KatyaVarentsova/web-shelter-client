@@ -5,12 +5,14 @@ interface IPetsState {
     pets: IPet[],
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const petsState: IPetsState = {
     pets: []
 }
 
 export const getPets = createAsyncThunk<IPet[], void, { rejectValue: string }>('petsSlice/getPets', async (_, thunkObject) => {
-    const response = await fetch('http://localhost:3000/api/pets')
+    const response = await fetch(`${API_URL}/api/pets`)
     const result: IPet[] = await response.json()
     const dispatch = thunkObject.dispatch
     if (result.length === 0) {

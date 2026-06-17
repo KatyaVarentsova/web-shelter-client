@@ -4,12 +4,14 @@ interface IInitialState {
     accessToken: string,
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const initialState: IInitialState = {
     accessToken: localStorage.getItem("accessToken") ?? ""
 }
 
 export const loginRequest = createAsyncThunk<void, { login: string, password: string }>('authSlice/loginRequest', ({ login, password }, thunkObject) => {
-    fetch('http://localhost:3000/login', {
+    fetch(`${API_URL}/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

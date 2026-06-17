@@ -5,6 +5,8 @@ interface IRequestsState {
     requests: IRequest[],
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const requestsState: IRequestsState = {
     requests: []
 }
@@ -12,7 +14,7 @@ const requestsState: IRequestsState = {
 export const getRequests = createAsyncThunk<IRequest[], void, { rejectValue: string }>('requestsSlice/getRequests', async (_, thunkObject) => {
     const state = thunkObject.getState() as any;
     const token = state.authSlice.accessToken;
-    const response = await fetch('http://localhost:3000/api/requests', {
+    const response = await fetch(`${API_URL}/api/requests`, {
         method: "GET",
         headers: {
             authorization: token
@@ -29,7 +31,7 @@ export const getRequests = createAsyncThunk<IRequest[], void, { rejectValue: str
 })
 
 export const createRequest = createAsyncThunk<IRequest, ICreateRequest>('requestsSlice/createRequest', async (request) => {
-    const response = await fetch('http://localhost:3000/api/requests', {
+    const response = await fetch(`${API_URL}/api/requests`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -46,7 +48,7 @@ export const createRequest = createAsyncThunk<IRequest, ICreateRequest>('request
 export const deleteRequest = createAsyncThunk<IRequest[], string, { rejectValue: string }>('requestsSlice/deleteRequest', async (id: string, thunkObject) => {
     const state = thunkObject.getState() as any;
     const token = state.authSlice.accessToken;
-    const response = await fetch(`http://localhost:3000/api/requests/${id}`, {
+    const response = await fetch(`${API_URL}/api/requests/${id}`, {
         method: 'DELETE',
         headers: {
             authorization: token

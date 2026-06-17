@@ -17,6 +17,7 @@ import { accessTokenSelector } from '../store/authSlice'
 import { AdminHeader } from '../components/AdminHeader/adminHeader'
 import { PetsTablePage } from '../pages/PetsTablePage/petsTablePage'
 import { PetFormPage } from '../pages/PetFormPage/petFormPage'
+import { ScrollToTop } from '../components/ScrollToTop/scrollToTop'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -35,6 +36,7 @@ function App() {
   return (
     <>
       <Header />
+      <ScrollToTop />
       {token && <AdminHeader />}
       <main className="main">
         <Routes>
@@ -46,8 +48,8 @@ function App() {
           <Route path='/info/requests' element={<PrivateRoute><RequestsPage /></PrivateRoute>} />
           <Route path='/info/dogs' element={<PrivateRoute><PetsTablePage category='dogs' /></PrivateRoute>} />
           <Route path='/info/cats' element={<PrivateRoute><PetsTablePage category='cats' /></PrivateRoute>} />
-          <Route path='/info/pet/create' element={<PrivateRoute><PetFormPage/></PrivateRoute>} />
-          <Route path='/info/pet/edit/:id' element={<PrivateRoute><PetFormPage/></PrivateRoute>} />
+          <Route path='/info/pet/create' element={<PrivateRoute><PetFormPage /></PrivateRoute>} />
+          <Route path='/info/pet/edit/:id' element={<PrivateRoute><PetFormPage /></PrivateRoute>} />
         </Routes>
       </main>
 

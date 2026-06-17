@@ -9,6 +9,8 @@ interface Props {
     request: IRequest;
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const statuses = [
     'новый',
     'в работе',
@@ -17,6 +19,7 @@ const statuses = [
 ];
 
 export const RequestRow: FC<Props> = ({ request }) => {
+    const CLIENT_URL = import.meta.env.VITE_CLIENT_URL;
     const dispatch = useAppDispatch()
     const token = useAppSelector(accessTokenSelector);
     function deleteHandler(id: string) {
@@ -31,7 +34,7 @@ export const RequestRow: FC<Props> = ({ request }) => {
         setStatus(newStatus);
         setIsEditing(false);
 
-        await fetch(`http://localhost:3000/api/requests/${request.id}`, {
+        await fetch(`${API_URL}/api/requests/${request.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -81,7 +84,7 @@ export const RequestRow: FC<Props> = ({ request }) => {
 
             <td>
                 <div className={style.blockComment}>
-                    <span><a className={style.link} href={`http://localhost:5173/pet/${request.pet_id}`} target="_blank" rel="noopener noreferrer">{request.pet_nickname}</a></span>
+                    <span><a className={style.link} href={`${CLIENT_URL}/pet/${request.pet_id}`} target="_blank" rel="noopener noreferrer">{request.pet_nickname}</a></span>
                     <span>{request.comment}</span>
                 </div>
             </td>

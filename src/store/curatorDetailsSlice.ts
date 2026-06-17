@@ -6,6 +6,8 @@ interface ICeratorDetailsState {
     curators: IShortCurators[],
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const curatorDetailsState: ICeratorDetailsState = {
     curator: {
         id: "f7f2d7a4-a480-4e2b-8948-9431f6b41ab4",
@@ -31,7 +33,7 @@ const curatorDetailsState: ICeratorDetailsState = {
 }
 
 export const getCuratorDetails = createAsyncThunk<ICurator, string, { rejectValue: string }>('curatorDetailsSlice/getCuratorDetails', async (id: string, thunkObject) => {
-    const response = await fetch(`http://localhost:3000/api/curators/${id}`)
+    const response = await fetch(`${API_URL}/api/curators/${id}`)
     if (!response.ok) {
         const errorData = await response.json();
         return thunkObject.rejectWithValue(errorData.message || 'Ошибка загрузки данных о кураторе')
@@ -43,7 +45,7 @@ export const getCuratorDetails = createAsyncThunk<ICurator, string, { rejectValu
 })
 
 export const getShortCurators = createAsyncThunk<IShortCurators[], void, { rejectValue: string }>('curatorDetailsSlice/getShortCurators', async (_, thunkObject) => {
-    const response = await fetch(`http://localhost:3000/api/curators/info`)
+    const response = await fetch(`${API_URL}/api/curators/info`)
     if (!response.ok) {
         const errorData = await response.json();
         return thunkObject.rejectWithValue(errorData.message || 'Ошибка загрузки данных о кураторах')
