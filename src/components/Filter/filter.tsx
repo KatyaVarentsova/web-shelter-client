@@ -1,4 +1,4 @@
-import { useEffect, useState, type FC } from "react";
+import { useState, type FC } from "react";
 import style from "./filter.module.css";
 import { Button } from "../Button/button";
 import { useAppDispatch, useAppSelector } from "../../store";
@@ -80,15 +80,12 @@ export const Filter: FC = () => {
     };
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(postPetFiltering(stateForm))
-    dispatch(saveFilter(stateForm));
-    dispatch(setIsOpenFilter(false));
-};
+        e.preventDefault();
+        dispatch(postPetFiltering(stateForm))
+        dispatch(saveFilter(stateForm));
+        dispatch(setIsOpenFilter(false));
+    };
 
-    // const fateHandler = () => {
-    //     dispatch(setIsOpenFilter(!isOpen))
-    // }
 
     const resetHandler = () => {
         setStateForm({
@@ -101,10 +98,6 @@ export const Filter: FC = () => {
             other: [],
         })
     }
-
-    // useEffect(() => {
-    //     console.log(stateForm)
-    // }, [stateForm])
 
     return (
         <div className={style.filter}>
